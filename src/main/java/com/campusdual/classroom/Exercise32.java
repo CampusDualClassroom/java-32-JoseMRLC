@@ -3,6 +3,7 @@ package com.campusdual.classroom;
 import com.campusdual.util.Utils;
 
 import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -13,7 +14,10 @@ public class Exercise32 {
     }
 
     public static String generateStringToSave(String string) {
-
+        if (string == null) {
+            return generateUserInputToSave();
+        }
+        return string;
     }
 
     private static String generateUserInputToSave(){
@@ -27,7 +31,13 @@ public class Exercise32 {
     }
 
     public static void printToFile(String string) {
-
+        String filePath = "src/main/resources/data.txt";
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            writer.write(string);
+            System.out.println("La cadena ha sido escrita en el archivo: " + filePath);
+        } catch (IOException e) {
+            System.err.println("Error: " + e.getMessage());
+        }
     }
 
 
